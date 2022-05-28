@@ -1,0 +1,403 @@
+.content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.blur {
+  width: 100%;
+  /* height: 100vh; */
+  filter: blur(10px);
+  margin-top: -130px;
+}
+
+/* 登录表单的制作 */
+.login-box {
+  position: absolute;
+  width: 553px;
+  height: 428px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+}
+
+.top {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  background: linear-gradient(45deg, #5d95fe 0%, #3abcff 100%);
+  padding: 10px 10px 0 10px;
+}
+
+.line {
+  display: flex;
+  width: 100%;
+  height: 44px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line .qq {
+  height: 44px;
+}
+
+.op {
+  display: flex;
+  height: 44px;
+  align-items: center;
+}
+
+.op img {
+  height: 22px;
+  margin-left: 10px;
+}
+
+.photo {
+  display: flex;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  /* background-color: red; */
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.photo img {
+  width: 100px;
+}
+
+.dot {
+  position: absolute;
+  top: 185px;
+  left: 54%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #09f175;
+  border: 4px solid white;
+  z-index: 2;
+}
+
+.cats {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  margin-top: 60px;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.cats li {
+  display: flex;
+  height: 50px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.cats li img {
+  flex: 1;
+  height: 100%;
+}
+
+.now {
+  border: 2px solid #09f175;
+}
+
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.table label {
+  display: flex;
+  width: 50%;
+  height: 40px;
+  margin: 5px;
+  align-items: center;
+  border-bottom: 1px solid #666;
+}
+
+.table label i {
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.table label i img {
+  height: 100%;
+}
+
+#username,
+#password {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 18px;
+}
+
+.table button {
+  width: 50%;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 5px;
+  background-color: #08bdfc;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.chat {
+  display: flex;
+  position: absolute;
+  width: 900px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  width: 28%;
+  height: 600px;
+  background-color: #2e3437;
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(199, 199, 200, 0.6);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  /* box-shadow: 0 0 5px salmon ; */
+  align-items: center;
+  overflow: hidden;
+}
+
+.own {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  box-shadow: 0 0 0;
+}
+
+.row img {
+  height: 100%;
+}
+
+.row span {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.list {
+  font-size: 20px;
+  color: #ffffff;
+  padding: 10px 5px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  margin-bottom: 5px;
+}
+
+.people {
+  width: 100%;
+  height: 485px;
+  overflow: auto;
+}
+
+.right {
+  width: 72%;
+  height: 600px;
+  background-color: #ececec;
+}
+
+.title {
+  height: 50px;
+  margin: 5px 20px;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  border-bottom: 2px solid #dfdfdf;
+}
+
+.center-message {
+  font-size: 12px;
+  text-align: center;
+  color: #acacac;
+}
+
+.left-message {
+  display: flex;
+  width: 100%;
+  height: 69px;
+  padding-left: 5px;
+}
+
+.right-message {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 69px;
+  right: 0;
+  padding-right: 5px;
+}
+
+.right-message .name {
+  text-align: right;
+}
+
+.right-message .text {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.left-message,
+.right-message {
+  margin: 5px 0;
+}
+
+.left-message img,
+.right-message img {
+  height: 40px;
+}
+
+.right-message .tage {
+  position: relative;
+  background-color: #b0e282;
+}
+
+.right-message .tage i {
+  position: absolute;
+  left: 94%;
+  /* right: -90%; */
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.name {
+  font-size: 14px;
+}
+
+.tage {
+  position: relative;
+  height: 100px;
+  background-color: #ffffff;
+  line-height: 39.5px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.tage .tu {
+  /* width: 100%; */
+  height: 100%;
+}
+
+.tage i {
+  position: absolute;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  top: 15%;
+  left: -10px;
+}
+
+.tage i img {
+  width: 100%;
+  height: 100%;
+}
+
+.center {
+  width: 100%;
+  height: 366px;
+  overflow: auto;
+}
+.slidebar::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.slidebar::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: skyblue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+.slidebar::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ededed;
+  border-radius: 10px;
+}
+.put {
+  width: 100%;
+  height: 174px;
+  background-color: #ebedec;
+  border-top: 2px solid #aaaaaa;
+}
+
+.emotion {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.emotion img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.write {
+  width: 100%;
+  height: 100px;
+  background-color: #ebedec;
+  padding-left: 10px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  resize: none;
+}
+
+.send {
+  display: flex;
+  float: right;
+  color: #92919b;
+  align-items: center;
+  font-size: 14px;
+}
+
+.send button {
+  padding: 5px 25px;
+  background-color: #fcfcfc;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: black;
+  border-radius: 5px;
+  font-size: 16px;
+}
