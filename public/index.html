@@ -19,8 +19,9 @@
 
   <body>
     <div class="content">
-      <img src="img/bg.png" class="blur" />
-      <div class="login-box" style="">
+      <!-- 背景图片,蒙版遮罩 -->
+      <div class="blur"></div>
+      <div class="login-box">
         <div class="top">
           <div class="line">
             <img src="img/logo.png" class="qq" />
@@ -131,7 +132,7 @@
       //监听添加用户的消息
       socket.on("addUser", (data) => {
         time = new Date().toLocaleString();
-        $(".center").append(`<div class="center-message">"${data.username}"加入了聊天室 ${time}</div>`);
+        $(".center").append(`<div class="center-message" style="color:#ff9889">"${data.username}"加入了聊天室 ${time}</div>`);
         $(".center").children(":last").get(0).scrollIntoView(false);
       });
 
