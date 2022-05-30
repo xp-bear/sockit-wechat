@@ -3,6 +3,7 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const cors = require("cors");
 const qiniu = require("qiniu");
+const axios = require("axios");
 //记录所有已经登录过的用户
 const users = [];
 
@@ -29,9 +30,14 @@ app.get("/", (req, res) => {
   res.redirect("/index.html");
 });
 
-app.get("/ip", (req, res) => {
+app.get("/ip", async (req, res) => {
   // 发起请求,获取用户的IP地址
-  res.send("ok");
+  let data = await axios({
+    methods: "GET",
+    type: "application/json",
+    url: "https://gamematrix.qq.com/sdk/v2/get_gateway",
+  });
+  res.json({ data: data.data });
 });
 
 server.listen(3000, () => {

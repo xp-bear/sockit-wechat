@@ -293,7 +293,7 @@ $(".song").on("click", function () {
                     <img src="${data.avatar}" >
                     <div class="text">
                         <span class="name">${data.username}</span>
-                        <span class="tage"><i><img src="img/right.png" ></i>${data.msg}</span>
+                       <span class="tage"><i><img src="img/right.png" ></i>${data.msg}</span>
                     </div>
             </div>
             `);
@@ -306,7 +306,7 @@ $(".song").on("click", function () {
                         <span class="name">${data.username}</span>
                         <span class="tage"><i><img src="img/left.png" ></i>${data.msg}</span>
                     </div>
-                </div>
+            </div>
             `);
       $(".right-message br").empty();
     }
@@ -538,7 +538,14 @@ function getName() {
   var name = familyName + givenName;
 
   // 获取到用户的ip地址
-
+  let pro = ajaxPromise("http://localhost:3000/ip");
+  pro.then((res) => {
+    const obj = JSON.parse(res);
+    let ip = obj.data.client_ip;
+    let province = obj.data.province;
+    // $("#username").attr("value", ip);
+    // $("#username").attr("disabled", true);
+  });
 
   $("#username").attr("value", name);
   $("#username").attr("disabled", true);
