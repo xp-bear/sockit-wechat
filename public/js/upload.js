@@ -1,6 +1,6 @@
 // promise封装ajax
 function ajaxPromise(url, method, data) {
-  var pro = new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var ajax = new XMLHttpRequest();
     var method = method || "GET";
     var data = data || null;
@@ -15,8 +15,6 @@ function ajaxPromise(url, method, data) {
       reject("请求服务器失败");
     }, 1000);
   });
-
-  return pro;
 }
 
 const baseURL = "http://cdn.xxoutman.cn/chat/";

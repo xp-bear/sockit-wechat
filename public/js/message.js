@@ -323,7 +323,7 @@ $(".photo img").attr("src", "img/" + num + ".png");
 // 随机名字
 // 生成随机姓名
 function getName() {
-  var familyNames = new Array(
+  var familyNames = [
     "赵",
     "钱",
     "孙",
@@ -423,9 +423,9 @@ function getName() {
     "和",
     "穆",
     "萧",
-    "尹"
-  );
-  var givenNames = new Array(
+    "尹",
+  ];
+  var givenNames = [
     "子璇",
     "淼",
     "国栋",
@@ -526,8 +526,8 @@ function getName() {
     "佳昊",
     "天昊",
     "萌萌",
-    "若萌"
-  );
+    "若萌",
+  ];
 
   var i = parseInt(10 * Math.random()) * 10 + parseInt(10 * Math.random());
   var familyName = familyNames[i];
@@ -536,7 +536,12 @@ function getName() {
   var givenName = givenNames[i];
 
   var name = familyName + givenName;
+
+  // 获取到用户的ip地址
+
+
   $("#username").attr("value", name);
+  $("#username").attr("disabled", true);
 }
 getName();
 

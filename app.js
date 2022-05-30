@@ -29,6 +29,11 @@ app.get("/", (req, res) => {
   res.redirect("/index.html");
 });
 
+app.get("/ip", (req, res) => {
+  // 发起请求,获取用户的IP地址
+  res.send("ok");
+});
+
 server.listen(3000, () => {
   console.log("websocket启动成功,监听http://localhost:3000/");
 });
