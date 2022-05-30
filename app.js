@@ -2,11 +2,28 @@ const app = require("express")();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const cors = require("cors");
+const qiniu = require("qiniu");
 //记录所有已经登录过的用户
 const users = [];
 
 app.use(require("express").static("public"));
 app.use(cors());
+
+var accessKey = "EGGnEY8AQ2_FKIfrcXerQ7Dntu7L0QEicVhYoHjS";
+var secretKey = "v-QNWJJh2S5MZ2B5nVAIce7TWAs7cH8uOev4aiSV";
+var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+// 返回上传文件的token值,返回给前端,根据token值进行一个上传
+//匹配GET请求路径设置回调函数
+app.get("/uploadToken", function (req, res) {
+  //
+  var options = {
+    scope: "cookies",
+    force: true,
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var uploadToken = putPolicy.uploadToken(mac);
+  res.json({ uploadToken });
+});
 
 app.get("/", (req, res) => {
   res.redirect("/index.html");

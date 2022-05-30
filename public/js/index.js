@@ -1,3 +1,4 @@
+// 背景颜色渐变处理
 $(function () {
   let count;
   let rotate;
