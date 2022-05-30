@@ -392,6 +392,7 @@ body {
   outline: none;
   font-size: 18px;
   resize: none;
+  overflow: hidden;
 }
 
 .send {

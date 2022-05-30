@@ -554,3 +554,8 @@ getName();
 
 // 随机密码
 $("#password").attr("value", "123456");
+
+// 截图按钮
+$(".cut").on("click", function (e) {
+  alert("截图功能正在开发中...");
+});
