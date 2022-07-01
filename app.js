@@ -30,15 +30,15 @@ app.get("/", (req, res) => {
   res.redirect("/index.html");
 });
 
-app.get("/ip", async (req, res) => {
-  // 发起请求,获取用户的IP地址
-  let data = await axios({
-    methods: "GET",
-    type: "application/json",
-    url: "https://gamematrix.qq.com/sdk/v2/get_gateway",
-  });
-  res.json({ data: data.data });
-});
+// app.get("/ip", async (req, res) => {
+//   // 发起请求,获取用户的IP地址
+//   let data = await axios({
+//     methods: "GET",
+//     type: "application/json",
+//     url: "https://gamematrix.qq.com/sdk/v2/get_gateway",
+//   });
+//   res.json({ data: data.data });
+// });
 
 server.listen(3000, () => {
   console.log("websocket启动成功,监听http://localhost:3000/");
