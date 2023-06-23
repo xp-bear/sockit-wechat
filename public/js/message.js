@@ -84,36 +84,73 @@ $(".song").on("click", () => {
   if (!content) {
     return alert("请输入内容");
   }
+  try {
+    // 处理base64图片编码图片
+    // console.log(content);
+    var regex = /<img.*?src=["'](.*?)["']/;
+    var match = regex.exec(content)[1]; //base64图片编码的格式
 
-  // 处理base64图片编码图片
-  // console.log(content);
-  // var regex = /<img.*?src=["'](.*?)["']/;
-  // var match = regex.exec(content);
-  // // console.log(match[1]);
-  // function uploadBase64Image(base64Image) {
-  //   var xhr = new XMLHttpRequest();
-  //   xhr.open("POST", "/uploadbase64", true);
-  //   xhr.setRequestHeader("Content-Type", "application/json");
+    // 获取base64格式的图片数据
+    var base64Image = match; // 这里是示例的base64图片数据
+    // 创建FormData对象
+    var formData = new FormData();
+    // 将base64图片数据转换为Blob对象
+    var blob = dataURItoBlob(base64Image);
+    // 将Blob对象添加到FormData中
+    formData.append("image", blob, "screenshot.jpg");
+    // 创建XMLHttpRequest对象
+    var xhr = new XMLHttpRequest();
+    // 设置POST请求，上传FormData对象
+    xhr.open("POST", "/uploadbase64", true);
 
-  //   xhr.onreadystatechange = function () {
-  //     if (xhr.readyState === 4 && xhr.status === 200) {
-  //       // 上传完成
-  //       var response = JSON.parse(xhr.responseText);
-  //       console.log(response);
-  //     }
-  //   };
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 上传完成
+        var response = JSON.parse(xhr.responseText);
+        // console.log(response);
+        content = content.replace(/<img.*?src=["'](.*?)["']>/g, function (match) {
+          return '<img src="' + response.url + '"/>';
+        });
 
-  //   var requestBody = JSON.stringify({ image: base64Image });
-  //   xhr.send(requestBody);
-  // }
-  // uploadBase64Image(match[1]);
+        //发送给服务器
+        socket.emit("sendMessage", {
+          msg: content,
+          username,
+          avatar,
+        });
+      }
+    };
 
-  //发送给服务器
-  socket.emit("sendMessage", {
-    msg: content,
-    username,
-    avatar,
-  });
+    // 发送请求
+    xhr.send(formData);
+
+    // 将base64图片数据转换为Blob对象的函数
+    function dataURItoBlob(dataURI) {
+      // 将base64数据部分分离出来
+      var byteString = atob(dataURI.split(",")[1]);
+
+      // 获取MIME类型
+      var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
+      // 将base64数据转换为Uint8Array
+      var arrayBuffer = new ArrayBuffer(byteString.length);
+      var uint8Array = new Uint8Array(arrayBuffer);
+      for (var i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+      }
+
+      // 创建Blob对象
+      var blob = new Blob([arrayBuffer], { type: mimeString });
+      return blob;
+    }
+  } catch (error) {
+    //发送给服务器
+    socket.emit("sendMessage", {
+      msg: content,
+      username,
+      avatar,
+    });
+  }
 });
 
 //绑定键盘事件
@@ -129,12 +166,73 @@ function getKeyCode(e) {
     if (!content) {
       return alert("请输入内容");
     }
-    //发送给服务器
-    socket.emit("sendMessage", {
-      msg: content,
-      username,
-      avatar,
-    });
+    try {
+      // 处理base64图片编码图片
+      // console.log(content);
+      var regex = /<img.*?src=["'](.*?)["']/;
+      var match = regex.exec(content)[1]; //base64图片编码的格式
+
+      // 获取base64格式的图片数据
+      var base64Image = match; // 这里是示例的base64图片数据
+      // 创建FormData对象
+      var formData = new FormData();
+      // 将base64图片数据转换为Blob对象
+      var blob = dataURItoBlob(base64Image);
+      // 将Blob对象添加到FormData中
+      formData.append("image", blob, "screenshot.jpg");
+      // 创建XMLHttpRequest对象
+      var xhr = new XMLHttpRequest();
+      // 设置POST请求，上传FormData对象
+      xhr.open("POST", "/uploadbase64", true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // 上传完成
+          var response = JSON.parse(xhr.responseText);
+          // console.log(response);
+          content = content.replace(/<img.*?src=["'](.*?)["']>/g, function (match) {
+            return '<img src="' + response.url + '"/>';
+          });
+
+          //发送给服务器
+          socket.emit("sendMessage", {
+            msg: content,
+            username,
+            avatar,
+          });
+        }
+      };
+
+      // 发送请求
+      xhr.send(formData);
+
+      // 将base64图片数据转换为Blob对象的函数
+      function dataURItoBlob(dataURI) {
+        // 将base64数据部分分离出来
+        var byteString = atob(dataURI.split(",")[1]);
+
+        // 获取MIME类型
+        var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
+        // 将base64数据转换为Uint8Array
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var uint8Array = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++) {
+          uint8Array[i] = byteString.charCodeAt(i);
+        }
+
+        // 创建Blob对象
+        var blob = new Blob([arrayBuffer], { type: mimeString });
+        return blob;
+      }
+    } catch (error) {
+      //发送给服务器
+      socket.emit("sendMessage", {
+        msg: content,
+        username,
+        avatar,
+      });
+    }
   }
 }
 
@@ -659,7 +757,7 @@ $("#logoFile").on("change", function (e) {
       if (xhr.readyState === 4 && xhr.status === 200) {
         // 上传完成
         var response = JSON.parse(xhr.responseText);
-        console.log(response);
+        // console.log(response);
         // 进行图片赋值
         let userImg = document.querySelector(".user");
         userImg.src = response.url;
