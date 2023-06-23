@@ -4,12 +4,17 @@ const io = require("socket.io")(server);
 const cors = require("cors");
 const qiniu = require("qiniu");
 const axios = require("axios");
+const multer = require("multer");
+const bodyParser = require("body-parser");
+const fs = require("fs");
+
+const upload = multer({ dest: "public/uploads/" }); // 指定文件上传的目录
+
 //记录所有已经登录过的用户
 const users = [];
-
-app.use(require("express").static("public"));
+app.use(require("express").static("public")); // 托管静态资源
 app.use(cors());
-
+app.use(bodyParser.json());
 var accessKey = "EGGnEY8AQ2_FKIfrcXerQ7Dntu7L0QEicVhYoHjS";
 var secretKey = "v-QNWJJh2S5MZ2B5nVAIce7TWAs7cH8uOev4aiSV";
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
@@ -34,6 +39,40 @@ app.get("/ip", (req, res) => {
   // 发起请求,获取用户的IP地址
   let data = req.ip;
   res.json({ data: data });
+});
+
+// 上传头像文件
+app.post("/upload", upload.single("file"), (req, res) => {
+  // req.file 包含上传的文件信息
+  if (req.file) {
+    // console.log(req.file);
+    // res.json({ message: "文件上传成功" });
+    let oldName = req.file.path; // 上传后默认的文件名 : 15daede910f2695c1352dccbb5c3e897
+    let name = req.file.originalname.split(".")[0] + "-" + Date.now();
+    let suffix = req.file.originalname.split(".")[1];
+    let newName = "public/uploads/" + name + "." + suffix; // 指定文件路径和文件名
+    let spaceName = newName.replace("public/", "");
+    // 3. 将上传后的文件重命名
+    fs.renameSync(oldName, newName);
+    // 4. 文件上传成功,返回上传成功后的文件路径
+    res.send({
+      code: 200,
+      url: "http://localhost:3000/" + spaceName, // 复制URL链接直接浏览器可以访问
+    });
+  } else {
+    res.status(400).json({ message: "文件上传失败" });
+  }
+});
+
+// 上传base64图片
+app.post("/uploadbase64", upload.single("image"), (req, res) => {
+  if (req.file) {
+    // 文件已经上传到服务器的uploads/目录下
+    // 可以根据需要进行处理，比如保存到数据库或其他操作
+    res.json({ message: "文件上传成功" });
+  } else {
+    res.status(400).json({ message: "文件上传失败" });
+  }
 });
 
 server.listen(3000, () => {

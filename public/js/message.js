@@ -84,6 +84,30 @@ $(".song").on("click", () => {
   if (!content) {
     return alert("请输入内容");
   }
+
+  // 处理base64图片编码图片
+  // console.log(content);
+  // var regex = /<img.*?src=["'](.*?)["']/;
+  // var match = regex.exec(content);
+  // // console.log(match[1]);
+  // function uploadBase64Image(base64Image) {
+  //   var xhr = new XMLHttpRequest();
+  //   xhr.open("POST", "/uploadbase64", true);
+  //   xhr.setRequestHeader("Content-Type", "application/json");
+
+  //   xhr.onreadystatechange = function () {
+  //     if (xhr.readyState === 4 && xhr.status === 200) {
+  //       // 上传完成
+  //       var response = JSON.parse(xhr.responseText);
+  //       console.log(response);
+  //     }
+  //   };
+
+  //   var requestBody = JSON.stringify({ image: base64Image });
+  //   xhr.send(requestBody);
+  // }
+  // uploadBase64Image(match[1]);
+
   //发送给服务器
   socket.emit("sendMessage", {
     msg: content,
@@ -606,4 +630,42 @@ $(".overlay").on("click", function (e) {
   let openImg = document.querySelector(".overlay img");
   openImg.src = "";
   overlay.style.display = "none";
+});
+
+// 登录页面,切换头像
+$("#logoFile").on("change", function (e) {
+  let fileInput = document.getElementById("logoFile");
+  let file = fileInput.files[0];
+  console.log(file);
+  if (file) {
+    var formData = new FormData();
+    formData.append("file", file);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/upload", true);
+    // 进度条
+    // xhr.upload.addEventListener(
+    //   "progress",
+    //   function (event) {
+    //     if (event.lengthComputable) {
+    //       var percent = (event.loaded / event.total) * 100;
+    //       var progress = document.getElementById("progress");
+    //       progress.innerHTML = "上传进度: " + percent.toFixed(2) + "%";
+    //     }
+    //   },
+    //   false
+    // );
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 上传完成
+        var response = JSON.parse(xhr.responseText);
+        console.log(response);
+        // 进行图片赋值
+        let userImg = document.querySelector(".user");
+        userImg.src = response.url;
+      }
+    };
+
+    xhr.send(formData);
+  }
 });
