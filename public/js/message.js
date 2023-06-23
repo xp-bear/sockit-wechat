@@ -266,10 +266,10 @@ $(".write").on("click", function () {
     icons: [
       {
         name: "QQ表情",
-        path: "./dist/img/qq/",
-        maxNum: 91,
-        excludeNums: [41, 45, 54],
-        file: ".gif",
+        path: "./dist/img/emoji/",
+        maxNum: 84,
+        // excludeNums: [41, 45, 54],
+        file: ".png",
       },
     ],
   });
