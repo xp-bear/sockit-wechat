@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <!-- 对移动端的适配  -->
@@ -15,6 +15,7 @@
     <script src="js/jquery.emoji.js"></script>
     <script src="js/jquery.mousewheel-3.0.6.min.js"></script>
     <script src="http://lib.baomitu.com/qiniu-js/3.4.0/qiniu.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <!-- 前面的逻辑处理程序 -->
     <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
   </head>
@@ -23,6 +24,7 @@
     <div class="content">
       <!-- 背景图片,蒙版遮罩 -->
       <div class="blur"></div>
+
       <div class="login-box">
         <div class="top">
           <div class="line">
@@ -67,9 +69,10 @@
           <div class="list">用户列表(双击@用户)</div>
           <div class="people slidebar"></div>
         </div>
-        <div class="right">
+        <div class="right" id="right">
           <div class="title">熊仔聊天室(99+)</div>
           <div class="center slidebar"></div>
+
           <div class="put">
             <div class="emotion">
               <img src="img/emotion.png" class="face" />
@@ -86,8 +89,12 @@
         </div>
       </div>
     </div>
-
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- 查看大图 -->
+    <div class="overlay">
+      <img src="" alt="Large Image" class="large-image" />
+    </div>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="./js/socket.io.js"></script>
     <!-- 上传图片脚本 -->
     <script src="./js/upload.js"></script>
     <!-- 自己的逻辑脚本 -->

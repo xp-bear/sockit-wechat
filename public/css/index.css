@@ -279,7 +279,7 @@ body {
 
 .left-message img,
 .right-message img {
-  height: 40px;
+  height: 37px;
 }
 
 .right-message .tage {
@@ -311,6 +311,51 @@ body {
   padding: 5px 15px;
   border-radius: 5px;
   text-align: center;
+  overflow-x: scroll;
+}
+
+/* // title-menu-min not卡片的滚动条 */
+.title-menu-min {
+  overflow-x: scroll !important;
+}
+.title-menu-min::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 0px;
+}
+.title-menu-min::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(59, 115, 240);
+  background: rgba(59, 115, 240, 0.2);
+}
+.title-menu-min::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(59, 115, 240, 0.2);
+  border-radius: 0;
+  background: rgba(59, 115, 240, 0.1);
+}
+
+/* 横向滚动条 */
+.titlex {
+  overflow-y: scroll !important;
+}
+.titlex::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 0px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 0px;
+}
+.titlex::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(59, 115, 240);
+  background: rgba(59, 115, 240, 0.2);
+}
+.titlex::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(59, 115, 240, 0.2);
+  border-radius: 0;
+  background: rgba(59, 115, 240, 0.1);
 }
 
 .tage .tu {
@@ -392,7 +437,16 @@ body {
   outline: none;
   font-size: 18px;
   resize: none;
-  overflow: hidden;
+  /* overflow: hidden;
+  overflow-y: scroll; */
+  overflow: auto;
+}
+.write img {
+  width: 100%;
+}
+.write .emoji_icon {
+  width: 30px;
+  height: 30px;
 }
 
 .send {
@@ -411,4 +465,34 @@ body {
   color: black;
   border-radius: 5px;
   font-size: 16px;
+}
+
+/* 图片点击 查看大图 */
+.image-container {
+  position: relative;
+}
+
+.small-image {
+  cursor: pointer;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+.overlay img {
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

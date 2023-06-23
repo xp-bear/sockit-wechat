@@ -109,7 +109,7 @@ socket.on("receiveMessage", (data) => {
                     <img src="${data.avatar}" >
                     <div class="text">
                         <span class="name">${data.username}</span>
-                        <span class="tage"><i><img src="img/right.png" ></i>${data.msg}</span>
+                        <span class="tage title-menu-min"><i><img src="img/right.png"></i>${data.msg}</span>
                     </div>
             </div>
             `);
@@ -120,7 +120,7 @@ socket.on("receiveMessage", (data) => {
                     <img src="${data.avatar}" >
                     <div class="text">
                         <span class="name">${data.username}</span>
-                        <span class="tage"><i><img src="img/left.png" ></i>${data.msg}</span>
+                        <span class="tage title-menu-min"><i><img src="img/left.png" ></i>${data.msg}</span>
                     </div>
                 </div>
             `);
@@ -163,7 +163,7 @@ socket.on("receiveImage", (data) => {
               <img src="${data.avatar}" >
               <div class="text">
                   <span class="name">${data.username}</span>
-                  <span class="tage"><i><img src="img/right.png" ></i><img src="${data.img}" class="tu"> </span>
+                  <span class="tage titlex"><i><img src="img/right.png" ></i><img src="${data.img}" class="tu"> </span>
               </div>
       </div>
       `);
@@ -183,7 +183,7 @@ socket.on("receiveImage", (data) => {
               <img src="${data.avatar}" >
               <div class="text">
                   <span class="name">${data.username}</span>
-                  <span class="tage"><i><img src="img/right.png" ></i> <video src="${data.img}" loop autoplay muted class="tu"></video></span>
+                  <span class="tage titlex"><i><img src="img/right.png" ></i> <video src="${data.img}" loop autoplay muted class="tu"></video></span>
               </div>
       </div>
       `);
@@ -205,7 +205,7 @@ socket.on("receiveImage", (data) => {
               <img src="${data.avatar}" >
               <div class="text">
                   <span class="name">${data.username}</span>
-                  <span class="tage"><i><img src="img/left.png" ></i><img src="${data.img}" class="tu"> </span>
+                  <span class="tage titlex"><i><img src="img/left.png" ></i><img src="${data.img}" class="tu"> </span>
               </div>
           </div>
       `);
@@ -223,7 +223,7 @@ socket.on("receiveImage", (data) => {
               <img src="${data.avatar}" >
               <div class="text">
                   <span class="name">${data.username}</span>
-                  <span class="tage"><i><img src="img/left.png" ></i><video src="${data.img}" loop autoplay muted class="tu"></video> </span>
+                  <span class="tage titlex"><i><img src="img/left.png" ></i><video src="${data.img}" loop autoplay muted class="tu"></video> </span>
               </div>
           </div>
       `);
@@ -293,7 +293,7 @@ $(".song").on("click", function () {
                     <img src="${data.avatar}" >
                     <div class="text">
                         <span class="name">${data.username}</span>
-                       <span class="tage"><i><img src="img/right.png" ></i>${data.msg}</span>
+                       <span class="tage title-menu-min"><i><img src="img/right.png" ></i>${data.msg}</span>
                     </div>
             </div>
             `);
@@ -304,7 +304,7 @@ $(".song").on("click", function () {
                     <img src="${data.avatar}" >
                     <div class="text">
                         <span class="name">${data.username}</span>
-                        <span class="tage"><i><img src="img/left.png" ></i>${data.msg}</span>
+                        <span class="tage title-menu-min"><i><img src="img/left.png" ></i>${data.msg}</span>
                     </div>
             </div>
             `);
@@ -557,5 +557,39 @@ $("#password").attr("value", "123456");
 
 // 截图按钮
 $(".cut").on("click", function (e) {
-  alert("截图功能正在开发中...");
+  // alert("截图功能正在开发中...");
+  let element = document.getElementById("right");
+
+  html2canvas(element).then(function (canvas) {
+    // 在回调函数中处理生成的 Canvas 元素
+    var screenshotImage = new Image();
+    screenshotImage.src = canvas.toDataURL();
+    screenshotImage.class = "screenshot";
+    document.querySelector(".write").appendChild(screenshotImage);
+  });
+});
+
+// 点击图片,查看大图,通过事件委派
+$(".center").on("click", function (e) {
+  // 检查点击的元素是否为目标按钮
+  if (e.target && e.target.matches("img")) {
+    // 获取点击的图片元素和对应的 src 属性值
+    const clickedImage = e.target;
+    const srcText = clickedImage.getAttribute("src");
+    // console.log(srcText);
+    let openImg = document.querySelector(".overlay img");
+
+    // 给大图进行赋值
+    openImg.src = srcText;
+    //  显示大图
+    let overlay = document.querySelector(".overlay");
+    overlay.style.display = "block";
+  }
+});
+// 点击大图,关闭遮罩层
+$(".overlay").on("click", function (e) {
+  let overlay = document.querySelector(".overlay");
+  let openImg = document.querySelector(".overlay img");
+  openImg.src = "";
+  overlay.style.display = "none";
 });
