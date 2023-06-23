@@ -2,7 +2,7 @@ var socket = io("http://localhost:3000");
 var username, avatar;
 var time;
 
-$(".btn").on("click", function () {
+function LoginFn() {
   var username = $("#username").val().trim();
   var password = $("#password").val();
   if (!username) {
@@ -21,6 +21,20 @@ $(".btn").on("click", function () {
     password,
     avatar,
   });
+}
+
+$(".btn").on("click", function () {
+  LoginFn(); //登录函数
+});
+
+// 监听按钮回车事件
+$(".login-box").on("keyup", function (event) {
+  // 按下的键码
+  var keyCode = event.keyCode || event.which;
+  // 判断是否是回车键
+  if (keyCode === 13) {
+    LoginFn(); //登录函数
+  }
 });
 
 //监听登录失败的请求
@@ -548,12 +562,12 @@ function getName() {
   });
 
   $("#username").attr("value", name);
-  $("#username").attr("disabled", true);
+  $("#username").attr("disabled", false); //可以修改用户名
 }
 getName();
 
 // 随机密码
-$("#password").attr("value", "123456");
+$("#password").attr("value", "12345678");
 
 // 截图按钮
 $(".cut").on("click", function (e) {
