@@ -1,7 +1,14 @@
 const app = require("express")();
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
 const cors = require("cors");
+app.use(cors());
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
 const qiniu = require("qiniu");
 const axios = require("axios");
 const multer = require("multer");
@@ -13,7 +20,7 @@ const upload = multer({ dest: "public/uploads/" }); // 指定文件上传的目�
 //记录所有已经登录过的用户
 const users = [];
 app.use(require("express").static("public")); // 托管静态资源
-app.use(cors());
+
 app.use(bodyParser.json());
 var accessKey = "EGGnEY8AQ2_FKIfrcXerQ7Dntu7L0QEicVhYoHjS";
 var secretKey = "v-QNWJJh2S5MZ2B5nVAIce7TWAs7cH8uOev4aiSV";
